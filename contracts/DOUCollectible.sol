@@ -6,12 +6,6 @@ import "./eip/2981/ERC2981Royalty.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/PullPayment.sol";
 
-/**
-    DEFENDERS OF UKRAINE CHARITY NFT
-    10.000 COLLECTION SIZE
-    0.01 MINTING PRICE
-    NO RESTRINCTION ON AMOUNT BOUGHT BY AN ADDRESS
- */
 
 contract OwnableDelegateProxy {}
 
