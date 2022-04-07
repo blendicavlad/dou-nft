@@ -17,16 +17,17 @@ async function main() {
     const contract = await contractFactory.deploy(baseTokenURI, "0xf57b2c51ded3a29e6891aba85459d600256cf317");
 
     // Wait for this transaction to be mined
-    await contract.deployed();
+    const c = await contract.deployed();
 
     // Get contract address
     console.log("Contract deployed to:", contract.address);
-    console.log("Contract balance is:", utils.formatEther(await provider.getBalance(contract.address)));
+    console.log("Contract balance is:", utils.formatEther(await contract.getBalance()));
 
-    // Mint 3 NFTs by sending 0.03 ether
-    txn = await contract.publicMint(3, { value: utils.parseEther('0.03') });
+    // Mint 3 NFTs by sending 0.3 ether
+    console.log("Mint 3 NFTs");
+    txn = await contract.publicMint(3, ethers.constants.AddressZero, { value: utils.parseEther('0.3') });
     await txn.wait()
-    console.log("Contract balance is:", utils.formatEther(await provider.getBalance(contract.address)));
+    console.log("Contract balance is:", utils.formatEther(await contract.getBalance()));
     console.log("Owner balance is:", utils.formatEther(await provider.getBalance(owner.address)));
 
     // Get total supply minted
@@ -49,7 +50,15 @@ async function main() {
     console.log("Owner due payments: " + await contract.payments(owner.address));
 
     txn = await contract.withdrawPayments(owner.address);
+
+    getTxCost = async (txHash) => {
+        let receipt = await ethers.provider.getTransactionReceipt(txHash);
+        return receipt.effectiveGasPrice.mul(receipt.gasUsed);
+    };
     await txn.wait()
+
+    console.log(await getTxCost(txn.hash));
+
     console.log("Withdrawn payments");
     console.log("Owner balance is:", utils.formatEther(await provider.getBalance(owner.address)));
 

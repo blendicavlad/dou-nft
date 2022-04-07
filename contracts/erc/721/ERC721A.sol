@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
 // Creator: Chiru Labs
-// Updated: Vlad Blendica
 
 pragma solidity ^0.8.4;
 

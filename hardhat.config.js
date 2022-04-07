@@ -28,9 +28,16 @@ module.exports = {
     }
   },
   gasReporter: {
-    enabled: true,
+    enabled: false,
     currency: 'EUR',
     coinmarketcap: 'e13b9518-dcc7-43ee-8b7c-3de890a50611',
     gasPrice: 40
+  },
+  networks: {
+    hardhat: {
+        accounts: {
+            count: 100
+        }
+    }
   }
 };

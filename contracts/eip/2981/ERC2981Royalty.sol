@@ -13,6 +13,9 @@ abstract contract ERC2981Royality is IERC2981 {
     royaltyPercentage = _roialityPercentage;
   }
 
+ /**
+  * @notice Recieves royality percent to be implemented by markets
+  */
   function royaltyInfo(
     uint256 ,
     uint256 _salePrice
